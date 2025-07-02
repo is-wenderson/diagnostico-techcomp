@@ -1,0 +1,143 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6;
+    color: #333;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+h1 {
+    color: #1e3a8a;
+    text-align: center;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+fieldset {
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+legend {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #334155;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+.radio-option {
+    display: block;
+    margin-bottom: 12px;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    transition: background-color 0.2s;
+}
+.radio-option:hover {
+    background-color: #f1f5f9;
+}
+.radio-option input {
+    margin-right: 12px;
+    transform: scale(1.1);
+}
+.button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 5px;
+    background: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+button:hover {
+    opacity: 0.9;
+}
+#pdf-btn {
+    background-color: #166534;
+}
+#diagnostico {
+    display: none; 
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 8px;
+    border: 2px solid #1e3a8a;
+}
+#diagnostico h2 {
+    color: #1e3a8a;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#diagnostico-geral {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+.critico { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+.intermediario { background-color: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; }
+.saudavel { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.pilar-resultado h3 {
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 5px;
+    color: #1e3a8a;
+    font-size: 1.2em;
+}
+#recomendacao-final {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e0e7ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    text-align: center;
+}
+#recomendacao-final h3 {
+     color: #1e3a8a;
+     margin-top: 0;
+}
+.beneficios-lista {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.beneficios-lista li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+.cta-whatsapp {
+    display: inline-block;
+    background-color: #25d366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.fechamento {
+    font-style: italic;
+    color: #475569;
+}

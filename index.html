@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnóstico Rápido de TI - Techcomp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Diagnóstico Rápido de TI</h1>
+        <form id="formulario">
+            <fieldset>
+                <legend>1. Como você sabe que um equipamento crítico está prestes a falhar?</legend>
+                <label class="radio-option"><input type="radio" name="pergunta1" value="A" required> (A) Temos um sistema que monitora a performance 24h e nos alerta sobre qualquer risco.</label>
+                <label class="radio-option"><input type="radio" name="pergunta1" value="B"> (B) Contamos com a percepção dos funcionários, que avisam quando notam lentidão.</label>
+                <label class="radio-option"><input type="radio" name="pergunta1" value="C"> (C) Normalmente, só descobrimos quando o equipamento para de funcionar.</label>
+            </fieldset>
+            <fieldset>
+                <legend>2. Sua internet cai ou fica lenta nos horários de maior movimento?</legend>
+                <label class="radio-option"><input type="radio" name="pergunta2" value="A" required> (A) Não. Nossa rede é estruturada para priorizar as operações críticas.</label>
+                <label class="radio-option"><input type="radio" name="pergunta2" value="B"> (B) Acontece às vezes, mas reiniciamos o roteador e geralmente volta.</label>
+                <label class="radio-option"><input type="radio" name="pergunta2" value="C"> (C) Sim, é comum e já perdemos vendas por causa disso.</label>
+            </fieldset>
+            <fieldset>
+                <legend>3. Com que frequência vocês fazem manutenções preventivas?</legend>
+                <label class="radio-option"><input type="radio" name="pergunta3" value="A" required> (A) Temos um cronograma regular e uma empresa parceira que cuida disso.</label>
+                <label class="radio-option"><input type="radio" name="pergunta3" value="B"> (B) Fazemos algo internamente quando sobra tempo ou um problema aparece.</label>
+                <label class="radio-option"><input type="radio" name="pergunta3" value="C"> (C) Não temos rotina. Só chamamos um técnico quando algo quebra.</label>
+            </fieldset>
+            <div class="button-container">
+                <button type="submit" id="gerar-btn">Gerar Diagnóstico</button>
+                <button type="button" id="pdf-btn" style="display: none;">Salvar Resultado em PDF</button>
+            </div>
+        </form>
+        <div id="diagnostico">
+            </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
