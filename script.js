@@ -1,63 +1,106 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Recomendações (sem alterações)
     const recomendacaoCritico = `<h3>Seu Plano de Ação Recomendado</h3><p>Seu diagnóstico aponta <strong>riscos operacionais e financeiros imediatos</strong>. A parceria com a <strong>Techcomp</strong> garante:</p><ul class="beneficios-lista"><li>🛑 Interrupção das suas perdas financeiras por paradas no sistema.</li><li>⚡ Estabilização imediata da sua rede para garantir as vendas.</li><li>🛡️ Proteção para seus equipamentos contra falhas inesperadas.</li><li>👨‍💻 Acesso ao nosso suporte técnico especializado para emergências.</li></ul><a href="https://wa.me/558481878563?text=Olá!%20Recebi%20meu%20diagnóstico%20e%20ele%20foi%20CRÍTICO.%20Preciso%20de%20ajuda." target="_blank" class="cta-whatsapp">Fale agora com um especialista no WhatsApp</a><p class="fechamento">Deixe a Techcomp cuidar da sua tecnologia para que você possa focar no que realmente importa: seu negócio.</p>`;
     const recomendacaoIntermediario = `<h3>Seu Plano de Ação Recomendado</h3><p>Seu diagnóstico aponta que sua operação funciona, mas com <strong>vulnerabilidades que podem se tornar problemas graves</strong>. A parceria com a <strong>Techcomp</strong> garante:</p><ul class="beneficios-lista"><li>⚙️ Otimização da sua rede para acabar com a lentidão nos horários de pico.</li><li>📈 Previsibilidade para que você evite futuras falhas e custos extras.</li><li>🔒 Aumento da segurança do seu negócio contra riscos digitais.</li><li>😌 Mais tranquilidade para você e sua equipe focarem nos clientes.</li></ul><a href="https://wa.me/558481878563?text=Olá!%20Recebi%20meu%20diagnóstico%20e%20ele%20foi%20INTERMEDIÁRIO.%20Quero%20saber%20como%20melhorar." target="_blank" class="cta-whatsapp">Fale agora com um especialista no WhatsApp</a><p class="fechamento">Deixe-nos te ajudar a encontrar a tranquilidade que você merece.</p>`;
     const recomendacaoSaudavel = `<h3>Seu Plano de Ação Estratégico</h3><p>Parabéns! Você já tem uma infraestrutura de TI sólida. Para empresas como a sua, o próximo passo é evoluir. A parceria com a <strong>Techcomp</strong> garante:</p><ul class="beneficios-lista"><li>🚀 Evolução da sua estrutura para um novo patamar de segurança e inteligência.</li><li>📊 Geração de dados e insights para suas decisões comerciais mais assertivas.</li><li>🛡️ Blindagem completa para seu negócio com nossas soluções avançadas (SEGCOMP).</li><li>🥇 Manutenção da sua vantagem competitiva no mercado.</li></ul><a href="https://wa.me/558481878563?text=Olá!%20Recebi%20meu%20diagnóstico%20e%20ele%20foi%20SAUDÁVEL.%20Quero%20conhecer%20os%20próximos%20passos." target="_blank" class="cta-whatsapp">Fale agora com um especialista no WhatsApp</a><p class="fechamento">Vamos juntos garantir que sua operação continue sendo referência.</p>`;
-
     const diagnosticoTextos = {A:{A:{A:{geral:"🟢 Estrutura Saudável",pilar1:"Parabéns, você possui um excelente controle sobre seus equipamentos, alertando sobre riscos antes que virem problemas. Isso demonstra um alto nível de maturidade em TI e protege sua operação de paradas inesperadas.",pilar2:"Sua rede é um diferencial competitivo. Por ser estável e priorizar o que é crítico, você garante que sua operação flua sem interrupções, mesmo nos horários de pico, e que nenhuma venda seja perdida por falhas de conexão.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoSaudavel},B:{geral:"🟢 Estrutura Saudável",pilar1:"Parabéns, você possui um excelente controle sobre seus equipamentos, alertando sobre riscos antes que virem problemas. Isso demonstra um alto nível de maturidade em TI e protege sua operação de paradas inesperadas.",pilar2:"Sua rede é estável, o que é ótimo para o negócio. Isso garante que a operação flua sem interrupções na maior parte do tempo e que as vendas não sejam frequentemente perdidas por problemas de conexão.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoSaudavel},C:{geral:"🟠 Intermediário",pilar1:"Você possui um excelente controle sobre seus equipamentos, o que é um ponto muito forte. No entanto, esse esforço pode ser em vão se a sua base não for cuidada.",pilar2:"Sua rede é estável, o que é ótimo para o negócio. Isso garante que a operação flua sem interrupções na maior parte do tempo e que as vendas não sejam frequentemente perdidas por problemas de conexão.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoIntermediario}},B:{A:{geral:"🟢 Estrutura Saudável",pilar1:"Parabéns, você possui um excelente controle sobre seus equipamentos, alertando sobre riscos antes que virem problemas. Isso demonstra um alto nível de maturidade em TI e protege sua operação de paradas inesperadas.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoSaudavel},B:{geral:"🟠 Intermediário",pilar1:"Você possui um excelente controle sobre seus equipamentos, o que é um ponto muito forte. No entanto, esse esforço pode ser em vão se a sua base não for cuidada.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoIntermediario},C:{geral:"🟠 Intermediário",pilar1:"Você possui um excelente controle sobre seus equipamentos, o que é um ponto muito forte. No entanto, esse esforço pode ser em vão se a sua base não for cuidada.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoIntermediario}},C:{A:{geral:"🟠 Intermediário",pilar1:"Você possui um excelente controle sobre seus equipamentos, o que é um ponto muito forte. No entanto, esse esforço pode ser em vão se a sua base não for cuidada.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoIntermediario},B:{geral:"🟠 Intermediário",pilar1:"Você possui um excelente controle sobre seus equipamentos, o que é um ponto muito forte. No entanto, esse esforço pode ser em vão se a sua base não for cuidada.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoIntermediario},C:{geral:"🔴 Crítico",pilar1:"Você possui um excelente controle sobre seus equipamentos, o que é um ponto muito forte. No entanto, esse esforço pode ser em vão se a sua base não for cuidada.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoCritico}}},B:{A:{A:{geral:"🟢 Estrutura Saudável",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"Sua rede é um diferencial competitivo. Por ser estável e priorizar o que é crítico, você garante que sua operação flua sem interrupções, mesmo nos horários de pico, e que nenhuma venda seja perdida por falhas de conexão.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoSaudavel},B:{geral:"🟠 Intermediário",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"Sua rede é estável, o que é ótimo para o negócio. Isso garante que a operação flua sem interrupções na maior parte do tempo e que as vendas não sejam frequentemente perdidas por problemas de conexão.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoIntermediario},C:{geral:"🟠 Intermediário",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"Sua rede é estável, o que é ótimo para o negócio. Isso garante que a operação flua sem interrupções na maior parte do tempo e que as vendas não sejam frequentemente perdidas por problemas de conexão.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoIntermediario}},B:{A:{geral:"🟠 Intermediário",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoIntermediario},B:{geral:"🟠 Intermediário",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoIntermediario},C:{geral:"🔴 Crítico",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoCritico}},C:{A:{geral:"🟠 Intermediário",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoIntermediario},B:{geral:"🔴 Crítico",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoCritico},C:{geral:"🔴 Crítico",pilar1:"Confiar apenas na percepção da sua equipe para identificar falhas é uma abordagem reativa. Problemas 'silenciosos', como um disco rígido prestes a falhar, podem não ser notados por você até que seja tarde demais e a operação pare.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoCritico}}},C:{A:{A:{geral:"🟠 Intermediário",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"Sua rede é um diferencial competitivo. Por ser estável e priorizar o que é crítico, você garante que sua operação flua sem interrupções, mesmo nos horários de pico, e que nenhuma venda seja perdida por falhas de conexão.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoIntermediario},B:{geral:"🟠 Intermediário",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"Sua rede é estável, o que é ótimo para o negócio. Isso garante que a operação flua sem interrupções na maior parte do tempo e que as vendas não sejam frequentemente perdidas por problemas de conexão.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoIntermediario},C:{geral:"🔴 Crítico",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"Sua rede é estável, o que é ótimo para o negócio. Isso garante que a operação flua sem interrupções na maior parte do tempo e que as vendas não sejam frequentemente perdidas por problemas de conexão.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoCritico}},B:{A:{geral:"🟠 Intermediário",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoIntermediario},B:{geral:"🔴 Crítico",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoCritico},C:{geral:"🔴 Crítico",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"As instabilidades ocasionais na sua rede são um ponto de atenção. Embora pareçam pequenas, essas falhas geram lentidão, afetam a experiência do seu cliente e podem representar riscos de segurança para você.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoCritico}},C:{A:{geral:"🔴 Crítico",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"Excelente! Sua rotina de manutenção preventiva garante que seus equipamentos e sistemas operem sempre com a máxima performance e segurança, evitando surpresas e custos desnecessários.",recomendacao:recomendacaoCritico},B:{geral:"🔴 Crítico",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"Sua manutenção interna, ainda que reativa, mostra uma preocupação com a saúde dos equipamentos. No entanto, depender de 'sobrar tempo' pode gerar sobrecarga e não cobrir todas as necessidades de forma preventiva.",recomendacao:recomendacaoCritico},C:{geral:"🔴 Crítico",pilar1:"Atualmente, você só descobre uma falha quando sua operação já parou. Este é o cenário de maior risco, pois cada minuto com o sistema inativo se traduz diretamente em perda de faturamento e na confiança do seu cliente.",pilar2:"Sua rede instável é o principal gargalo do seu negócio. As quedas e a lentidão frequentes causam perda de vendas para você, estresse na equipe e danos à reputação da sua empresa.",pilar3:"A ausência de manutenção preventiva é o ponto mais crítico da sua estrutura. Seus equipamentos, mesmo os melhores, podem falhar a qualquer momento sem aviso, comprometendo toda a sua operação.",recomendacao:recomendacaoCritico}}}};
-            
+
+    // Seletores de elementos
     const form = document.getElementById('formulario');
     const divDiagnostico = document.getElementById('diagnostico');
     const gerarBtn = document.getElementById('gerar-btn');
     const pdfBtn = document.getElementById('pdf-btn');
-    let diagnosticoAtual = null;
+    
+    // Novos seletores para o Modal
+    const modalOverlay = document.getElementById('modal-overlay');
+    const leadForm = document.getElementById('lead-form');
+    const modalCloseBtn = document.querySelector('.modal-close-btn');
 
+    let diagnosticoAtual = null;
+    let respostasSalvas = {};
+
+    // 1. Evento do formulário principal: validar e abrir o modal
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         
-        
-            const resp1 = form.querySelector('input[name="pergunta1"]:checked')?.value;
-            const resp2 = form.querySelector('input[name="pergunta2"]:checked')?.value;
-            const resp3 = form.querySelector('input[name="pergunta3"]:checked')?.value;
+        const resp1 = form.querySelector('input[name="pergunta1"]:checked')?.value;
+        const resp2 = form.querySelector('input[name="pergunta2"]:checked')?.value;
+        const resp3 = form.querySelector('input[name="pergunta3"]:checked')?.value;
 
-            if (!resp1 || !resp2 || !resp3) {
-                alert("Por favor, responda a todas as perguntas para gerar o diagnóstico.");
-                return;
-            }
-            
-            diagnosticoAtual = diagnosticoTextos[resp1][resp2][resp3];
-            
-            const resultadoHTML = `
-                <h2>Diagnóstico Personalizado</h2>
-                <div id="diagnostico-geral" class="${getClasseEstilo(diagnosticoAtual.geral)}">
-                    ${diagnosticoAtual.geral}
-                </div>
-                <div class="pilar-resultado">
-                    <h3>Pilar 1: Monitoramento de Equipamentos</h3>
-                    <p>${diagnosticoAtual.pilar1}</p>
-                </div>
-                <div class="pilar-resultado">
-                    <h3>Pilar 2: Conectividade / Internet</h3>
-                    <p>${diagnosticoAtual.pilar2}</p>
-                </div>
-                <div class="pilar-resultado">
-                    <h3>Pilar 3: Manutenção Preventiva</h3>
-                    <p>${diagnosticoAtual.pilar3}</p>
-                </div>
-                <div id="recomendacao-final">
-                    ${diagnosticoAtual.recomendacao}
-                </div>
-            `;
-            
-            divDiagnostico.innerHTML = resultadoHTML;
-            divDiagnostico.style.display = "block";
-            gerarBtn.style.display = 'none';
-            pdfBtn.style.display = 'inline-block';
-            divDiagnostico.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!resp1 || !resp2 || !resp3) {
+            alert("Por favor, responda a todas as perguntas para gerar o diagnóstico.");
+            return;
+        }
 
+        // Salva as respostas para usar depois
+        respostasSalvas = { resp1, resp2, resp3 };
         
+        // Mostra o modal
+        modalOverlay.style.display = 'flex';
     });
 
+    // 2. Evento do formulário do modal: coletar dados, fechar modal e mostrar diagnóstico
+    leadForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Aqui você pode capturar e enviar os dados do lead para seu servidor/CRM
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const whatsapp = document.getElementById('whatsapp').value;
+        console.log("Lead capturado:", { nome, email, whatsapp }); // Apenas para demonstração
+
+        // Fecha o modal
+        modalOverlay.style.display = 'none';
+
+        // Gera e mostra o diagnóstico usando as respostas salvas
+        const { resp1, resp2, resp3 } = respostasSalvas;
+        diagnosticoAtual = diagnosticoTextos[resp1][resp2][resp3];
+        
+        const resultadoHTML = `
+            <h2>Diagnóstico Personalizado</h2>
+            <div id="diagnostico-geral" class="${getClasseEstilo(diagnosticoAtual.geral)}">
+                ${diagnosticoAtual.geral}
+            </div>
+            <div class="pilar-resultado">
+                <h3>Pilar 1: Monitoramento de Equipamentos</h3>
+                <p>${diagnosticoAtual.pilar1}</p>
+            </div>
+            <div class="pilar-resultado">
+                <h3>Pilar 2: Conectividade / Internet</h3>
+                <p>${diagnosticoAtual.pilar2}</p>
+            </div>
+            <div class="pilar-resultado">
+                <h3>Pilar 3: Manutenção Preventiva</h3>
+                <p>${diagnosticoAtual.pilar3}</p>
+            </div>
+            <div id="recomendacao-final">
+                ${diagnosticoAtual.recomendacao}
+            </div>
+        `;
+        
+        divDiagnostico.innerHTML = resultadoHTML;
+        divDiagnostico.style.display = "block";
+        gerarBtn.style.display = 'none';
+        pdfBtn.style.display = 'inline-block';
+        divDiagnostico.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Função para fechar o modal
+    function fecharModal() {
+        modalOverlay.style.display = 'none';
+    }
+
+    // 3. Eventos para fechar o modal
+    modalCloseBtn.addEventListener('click', fecharModal);
+    modalOverlay.addEventListener('click', (e) => {
+        // Fecha somente se clicar no fundo (overlay) e não no conteúdo do modal
+        if (e.target === modalOverlay) {
+            fecharModal();
+        }
+    });
+
+    // 4. Evento do botão de PDF (sem alterações na lógica interna)
     pdfBtn.addEventListener('click', function() {
         if (diagnosticoAtual) {
             gerarEBaixarPDF(diagnosticoAtual);
@@ -66,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Função que usa jsPDF para criar o PDF de forma programática e confiável
+    // Função para gerar PDF (sem alterações)
     function gerarEBaixarPDF(diagnostico) {
         try {
             const { jsPDF } = window.jspdf;
@@ -116,11 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
             adicionarSecao("Pilar 2: Conectividade / Internet", diagnostico.pilar2);
             adicionarSecao("Pilar 3: Manutenção Preventiva", diagnostico.pilar3);
             
-            // Limpa o HTML da recomendação para extrair apenas o texto para o PDF
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = diagnostico.recomendacao;
             const recomendacaoText = tempDiv.innerText || tempDiv.textContent || "";
-            adicionarSecao("Seu Plano de Ação Recomendado", recomendacaoText.replace("Fale agora com um especialista no WhatsApp", "")); // Remove o botão do texto
+            adicionarSecao("Seu Plano de Ação Recomendado", recomendacaoText.replace("Fale agora com um especialista no WhatsApp", ""));
 
             doc.save('Diagnostico_TI_Techcomp.pdf');
         } catch (error) {
@@ -129,10 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Função para estilo (sem alterações)
     function getClasseEstilo(textoGeral) {
-         if (textoGeral.includes("Crítico")) return 'critico';
-         if (textoGeral.includes("Intermediário")) return 'intermediario';
-         if (textoGeral.includes("Saudável")) return 'saudavel';
-         return '';
+        if (textoGeral.includes("Crítico")) return 'critico';
+        if (textoGeral.includes("Intermediário")) return 'intermediario';
+        if (textoGeral.includes("Saudável")) return 'saudavel';
+        return '';
     }
 });
