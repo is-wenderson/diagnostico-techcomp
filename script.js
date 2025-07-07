@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         
-        try {
+        
             const resp1 = form.querySelector('input[name="pergunta1"]:checked')?.value;
             const resp2 = form.querySelector('input[name="pergunta2"]:checked')?.value;
             const resp3 = form.querySelector('input[name="pergunta3"]:checked')?.value;
@@ -55,10 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pdfBtn.style.display = 'inline-block';
             divDiagnostico.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        } catch (error) {
-            console.error("Ocorreu um erro ao exibir o diagnóstico na tela:", error);
-            alert("Desculpe, ocorreu um erro inesperado. Por favor, tente novamente.");
-        }
+        
     });
 
     pdfBtn.addEventListener('click', function() {
