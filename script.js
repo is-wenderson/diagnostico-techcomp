@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Recomendações (sem alterações)
+    // Recomendações e Textos de Diagnóstico
     const recomendacaoCritico = `<h3>Seu Plano de Ação Recomendado</h3><p>Seu diagnóstico aponta <strong>riscos operacionais e financeiros imediatos</strong>. A parceria com a <strong>Techcomp</strong> garante:</p><ul class="beneficios-lista"><li>🛑 Interrupção das suas perdas financeiras por paradas no sistema.</li><li>⚡ Estabilização imediata da sua rede para garantir as vendas.</li><li>🛡️ Proteção para seus equipamentos contra falhas inesperadas.</li><li>👨‍💻 Acesso ao nosso suporte técnico especializado para emergências.</li></ul><a href="https://wa.me/558481878563?text=Olá!%20Recebi%20meu%20diagnóstico%20e%20ele%20foi%20CRÍTICO.%20Preciso%20de%20ajuda." target="_blank" class="cta-whatsapp">Fale agora com um especialista no WhatsApp</a><p class="fechamento">Deixe a Techcomp cuidar da sua tecnologia para que você possa focar no que realmente importa: seu negócio.</p>`;
     const recomendacaoIntermediario = `<h3>Seu Plano de Ação Recomendado</h3><p>Seu diagnóstico aponta que sua operação funciona, mas com <strong>vulnerabilidades que podem se tornar problemas graves</strong>. A parceria com a <strong>Techcomp</strong> garante:</p><ul class="beneficios-lista"><li>⚙️ Otimização da sua rede para acabar com a lentidão nos horários de pico.</li><li>📈 Previsibilidade para que você evite futuras falhas e custos extras.</li><li>🔒 Aumento da segurança do seu negócio contra riscos digitais.</li><li>😌 Mais tranquilidade para você e sua equipe focarem nos clientes.</li></ul><a href="https://wa.me/558481878563?text=Olá!%20Recebi%20meu%20diagnóstico%20e%20ele%20foi%20INTERMEDIÁRIO.%20Quero%20saber%20como%20melhorar." target="_blank" class="cta-whatsapp">Fale agora com um especialista no WhatsApp</a><p class="fechamento">Deixe-nos te ajudar a encontrar a tranquilidade que você merece.</p>`;
     const recomendacaoSaudavel = `<h3>Seu Plano de Ação Estratégico</h3><p>Parabéns! Você já tem uma infraestrutura de TI sólida. Para empresas como a sua, o próximo passo é evoluir. A parceria com a <strong>Techcomp</strong> garante:</p><ul class="beneficios-lista"><li>🚀 Evolução da sua estrutura para um novo patamar de segurança e inteligência.</li><li>📊 Geração de dados e insights para suas decisões comerciais mais assertivas.</li><li>🛡️ Blindagem completa para seu negócio com nossas soluções avançadas (SEGCOMP).</li><li>🥇 Manutenção da sua vantagem competitiva no mercado.</li></ul><a href="https://wa.me/558481878563?text=Olá!%20Recebi%20meu%20diagnóstico%20e%20ele%20foi%20SAUDÁVEL.%20Quero%20conhecer%20os%20próximos%20passos." target="_blank" class="cta-whatsapp">Fale agora com um especialista no WhatsApp</a><p class="fechamento">Vamos juntos garantir que sua operação continue sendo referência.</p>`;
@@ -11,11 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const divDiagnostico = document.getElementById('diagnostico');
     const gerarBtn = document.getElementById('gerar-btn');
     const pdfBtn = document.getElementById('pdf-btn');
-    
-    // Novos seletores para o Modal
+
+    // Seletores do Modal
     const modalOverlay = document.getElementById('modal-overlay');
     const leadForm = document.getElementById('lead-form');
     const modalCloseBtn = document.querySelector('.modal-close-btn');
+    const whatsappInput = document.getElementById('whatsapp');
 
     let diagnosticoAtual = null;
     let respostasSalvas = {};
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Evento do formulário principal: validar e abrir o modal
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         const resp1 = form.querySelector('input[name="pergunta1"]:checked')?.value;
         const resp2 = form.querySelector('input[name="pergunta2"]:checked')?.value;
         const resp3 = form.querySelector('input[name="pergunta3"]:checked')?.value;
@@ -33,74 +33,110 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Salva as respostas para usar depois
         respostasSalvas = { resp1, resp2, resp3 };
-        
-        // Mostra o modal
-        modalOverlay.style.display = 'flex';
+
+        modalOverlay.classList.add('visivel');
     });
 
-    // 2. Evento do formulário do modal: coletar dados, fechar modal e mostrar diagnóstico
+    // 2. Evento do formulário do modal: coletar, ENVIAR e mostrar diagnóstico
     leadForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Aqui você pode capturar e enviar os dados do lead para seu servidor/CRM
-        const nome = document.getElementById('nome').value;
-        const email = document.getElementById('email').value;
-        const whatsapp = document.getElementById('whatsapp').value;
-        console.log("Lead capturado:", { nome, email, whatsapp }); // Apenas para demonstração
+        // URL DO SEU SCRIPT GOOGLE - ATUALIZADA!
+        const urlDoScript = "https://script.google.com/macros/s/AKfycbyWXfd0bkFf2WxCCry1qLWRI59IWZmUbvhneW9VR7IY0HdbsTGh-f3_65UqoDmh_Wg/exec";
 
-        // Fecha o modal
-        modalOverlay.style.display = 'none';
+        const submitButton = e.target.querySelector('button[type="submit"]');
+        const formData = new FormData(leadForm);
 
-        // Gera e mostra o diagnóstico usando as respostas salvas
-        const { resp1, resp2, resp3 } = respostasSalvas;
-        diagnosticoAtual = diagnosticoTextos[resp1][resp2][resp3];
-        
-        const resultadoHTML = `
-            <h2>Diagnóstico Personalizado</h2>
-            <div id="diagnostico-geral" class="${getClasseEstilo(diagnosticoAtual.geral)}">
-                ${diagnosticoAtual.geral}
-            </div>
-            <div class="pilar-resultado">
-                <h3>Pilar 1: Monitoramento de Equipamentos</h3>
-                <p>${diagnosticoAtual.pilar1}</p>
-            </div>
-            <div class="pilar-resultado">
-                <h3>Pilar 2: Conectividade / Internet</h3>
-                <p>${diagnosticoAtual.pilar2}</p>
-            </div>
-            <div class="pilar-resultado">
-                <h3>Pilar 3: Manutenção Preventiva</h3>
-                <p>${diagnosticoAtual.pilar3}</p>
-            </div>
-            <div id="recomendacao-final">
-                ${diagnosticoAtual.recomendacao}
-            </div>
-        `;
-        
-        divDiagnostico.innerHTML = resultadoHTML;
-        divDiagnostico.style.display = "block";
-        gerarBtn.style.display = 'none';
-        pdfBtn.style.display = 'inline-block';
-        divDiagnostico.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        submitButton.disabled = true;
+        submitButton.textContent = "Salvando...";
+
+        fetch(urlDoScript, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+                console.log("Dados salvos na planilha com sucesso!");
+            } else {
+                console.error("Erro ao salvar na planilha:", data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro no envio do formulário:', error);
+        })
+        .finally(() => {
+            submitButton.disabled = false;
+            submitButton.textContent = "Ver meu Diagnóstico Agora";
+
+            fecharModal();
+
+            const { resp1, resp2, resp3 } = respostasSalvas;
+            diagnosticoAtual = diagnosticoTextos[resp1][resp2][resp3];
+
+            const resultadoHTML = `
+                <h2>Diagnóstico Personalizado</h2>
+                <div id="diagnostico-geral" class="${getClasseEstilo(diagnosticoAtual.geral)}">
+                    ${diagnosticoAtual.geral}
+                </div>
+                <div class="pilar-resultado">
+                    <h3>Pilar 1: Monitoramento de Equipamentos</h3>
+                    <p>${diagnosticoAtual.pilar1}</p>
+                </div>
+                <div class="pilar-resultado">
+                    <h3>Pilar 2: Conectividade / Internet</h3>
+                    <p>${diagnosticoAtual.pilar2}</p>
+                </div>
+                <div class="pilar-resultado">
+                    <h3>Pilar 3: Manutenção Preventiva</h3>
+                    <p>${diagnosticoAtual.pilar3}</p>
+                </div>
+                <div id="recomendacao-final">
+                    ${diagnosticoAtual.recomendacao}
+                </div>
+            `;
+            
+            divDiagnostico.innerHTML = resultadoHTML;
+            divDiagnostico.style.display = "block";
+            gerarBtn.style.display = 'none';
+            pdfBtn.style.display = 'inline-block';
+            divDiagnostico.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
     });
 
-    // Função para fechar o modal
+    // 3. Função para fechar o modal
     function fecharModal() {
-        modalOverlay.style.display = 'none';
+        modalOverlay.classList.remove('visivel');
     }
 
-    // 3. Eventos para fechar o modal
     modalCloseBtn.addEventListener('click', fecharModal);
     modalOverlay.addEventListener('click', (e) => {
-        // Fecha somente se clicar no fundo (overlay) e não no conteúdo do modal
         if (e.target === modalOverlay) {
             fecharModal();
         }
     });
 
-    // 4. Evento do botão de PDF (sem alterações na lógica interna)
+    // 4. Máscara para o campo WhatsApp
+    whatsappInput.addEventListener('input', (e) => {
+        let valor = e.target.value.replace(/\D/g, '');
+        valor = valor.substring(0, 11);
+
+        let formatado = '';
+        if (valor.length > 0) {
+            formatado = '(' + valor.substring(0, 2);
+        }
+        if (valor.length > 2) {
+            formatado += ') ' + valor.substring(2, 7);
+        }
+        if (valor.length > 7) {
+            formatado += '-' + valor.substring(7, 11);
+        }
+        
+        e.target.value = formatado;
+    });
+
+    // 5. Evento do botão de PDF
     pdfBtn.addEventListener('click', function() {
         if (diagnosticoAtual) {
             gerarEBaixarPDF(diagnosticoAtual);
@@ -109,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Função para gerar PDF (sem alterações)
+    // Função para gerar PDF
     function gerarEBaixarPDF(diagnostico) {
         try {
             const { jsPDF } = window.jspdf;
@@ -171,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para estilo (sem alterações)
+    // Função para estilo
     function getClasseEstilo(textoGeral) {
         if (textoGeral.includes("Crítico")) return 'critico';
         if (textoGeral.includes("Intermediário")) return 'intermediario';
