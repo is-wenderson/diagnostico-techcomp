@@ -314,7 +314,7 @@ button:hover {
 }
 
 /* ================================================= */
-/* ===== NOVOS ESTILOS RESPONSIVOS ===== */
+/* ===== ESTILOS RESPONSIVOS ===== */
 /* ================================================= */
 
 @media (max-width: 768px) {
@@ -358,7 +358,14 @@ button:hover {
         margin-top: 20px;
     }
 
-    /* Ajusta o modal para telas menores */
+    /* ---- AJUSTE ADICIONADO AQUI ---- */
+    /* Ajusta o modal para ocupar melhor a tela, com margens fixas nas laterais */
+    #modal-content {
+        width: auto;
+        margin: 0 15px;
+    }
+    /* ---------------------------------- */
+
     #modal-content p {
         padding: 0 15px;
         font-size: 1em;
