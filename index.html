@@ -74,4 +74,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
+
+<script>
+    let headerBase64 = null;
+    const img = new Image();
+    img.src = 'header.png';
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        headerBase64 = canvas.toDataURL('image/png');
+    };
+</script>
+
+
 </html>
