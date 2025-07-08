@@ -1,10 +1,19 @@
+/* === ESTILOS GERAIS === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /* Garante que padding e borda não aumentem o tamanho do elemento */
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f4f7f6;
     color: #333;
+    line-height: 1.6; /* Melhora a legibilidade */
 }
+
 .container {
     max-width: 800px;
     margin: 20px auto;
@@ -13,19 +22,24 @@ body {
     border-radius: 8px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
+
 h1 {
     color: #1e3a8a;
     text-align: center;
     border-bottom: 2px solid #e2e8f0;
     padding-bottom: 15px;
+    margin-top: 0;
     margin-bottom: 30px;
+    font-size: 2em; /* Tamanho de fonte mais consistente */
 }
+
 fieldset {
     border: 1px solid #e2e8f0;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 25px;
 }
+
 legend {
     font-weight: bold;
     font-size: 1.1em;
@@ -33,6 +47,7 @@ legend {
     margin-bottom: 15px;
     padding: 0 10px;
 }
+
 .radio-option {
     display: block;
     margin-bottom: 12px;
@@ -43,17 +58,21 @@ legend {
     border: 1px solid #e2e8f0;
     transition: background-color 0.2s;
 }
+
 .radio-option:hover {
     background-color: #f1f5f9;
 }
+
 .radio-option input {
     margin-right: 12px;
     transform: scale(1.1);
 }
+
 .button-container {
     text-align: center;
     margin-top: 30px;
 }
+
 button {
     padding: 12px 25px;
     font-size: 1.1em;
@@ -66,25 +85,30 @@ button {
     cursor: pointer;
     transition: opacity 0.3s;
 }
+
 button:hover {
     opacity: 0.9;
 }
+
 #pdf-btn {
     background-color: #166534;
 }
+
 #diagnostico {
-    display: none; 
+    display: none;
     padding: 30px;
     margin-top: 40px;
     border-radius: 8px;
     border: 2px solid #1e3a8a;
 }
+
 #diagnostico h2 {
     color: #1e3a8a;
     text-align: center;
     margin-top: 0;
     margin-bottom: 20px;
 }
+
 #diagnostico-geral {
     text-align: center;
     font-size: 1.4em;
@@ -94,15 +118,32 @@ button:hover {
     margin-bottom: 25px;
     text-transform: uppercase;
 }
-.critico { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-.intermediario { background-color: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; }
-.saudavel { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+
+.critico {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.intermediario {
+    background-color: #ffedd5;
+    color: #9a3412;
+    border: 1px solid #fed7aa;
+}
+
+.saudavel {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
 .pilar-resultado h3 {
     border-bottom: 1px solid #cbd5e1;
     padding-bottom: 5px;
     color: #1e3a8a;
     font-size: 1.2em;
 }
+
 #recomendacao-final {
     margin-top: 30px;
     padding: 20px;
@@ -111,10 +152,12 @@ button:hover {
     border-radius: 8px;
     text-align: center;
 }
+
 #recomendacao-final h3 {
-     color: #1e3a8a;
-     margin-top: 0;
+    color: #1e3a8a;
+    margin-top: 0;
 }
+
 .beneficios-lista {
     list-style: none;
     padding: 0;
@@ -123,10 +166,12 @@ button:hover {
     margin-top: 15px;
     margin-bottom: 20px;
 }
+
 .beneficios-lista li {
     margin-bottom: 10px;
     font-size: 1.1em;
 }
+
 .cta-whatsapp {
     display: inline-block;
     background-color: #25d366;
@@ -137,13 +182,14 @@ button:hover {
     font-weight: bold;
     margin-bottom: 15px;
 }
+
 .fechamento {
     font-style: italic;
     color: #475569;
 }
 
 /* ================================================= */
-/* ===== ESTILOS DO MODAL (VERSÃO MELHORADA) ===== */
+/* ===== ESTILOS DO MODAL ===== */
 /* ================================================= */
 
 #modal-overlay {
@@ -152,13 +198,13 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75); /* Mais escuro para dar mais foco */
+    background-color: rgba(0, 0, 0, 0.75);
     z-index: 1000;
-    display: none; 
+    display: none;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(4px); /* Efeito de desfoque no fundo */
-    opacity: 0; /* Começa invisível para a transição */
+    backdrop-filter: blur(4px);
+    opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
 
@@ -169,15 +215,15 @@ button:hover {
 
 #modal-content {
     background-color: #ffffff;
-    border-radius: 12px; /* Bordas mais arredondadas */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     max-width: 500px;
     width: 95%;
     position: relative;
     text-align: center;
-    padding: 0; /* Remove padding antigo para controlar com a estrutura interna */
-    overflow: hidden; /* Garante que a borda do header fique contida */
-    transform: scale(0.95); /* Começa um pouco menor */
+    padding: 0;
+    overflow: hidden;
+    transform: scale(0.95);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -192,7 +238,7 @@ button:hover {
 }
 
 #modal-content h2 {
-    color: white; /* Cor do título alterada */
+    color: white;
     margin: 0;
     font-size: 1.5em;
 }
@@ -233,7 +279,7 @@ button:hover {
 #lead-form label {
     display: block;
     margin-bottom: 6px;
-    font-weight: 600; /* Um pouco mais forte */
+    font-weight: 600;
     color: #334155;
     font-size: 0.95em;
 }
@@ -243,7 +289,6 @@ button:hover {
     padding: 12px;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
-    box-sizing: border-box; 
     font-size: 1em;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -259,11 +304,71 @@ button:hover {
     padding: 14px 25px;
     font-size: 1.1em;
     margin-top: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 #finalizar-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(30, 58, 138, 0.2);
+}
+
+/* ================================================= */
+/* ===== NOVOS ESTILOS RESPONSIVOS ===== */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    /* Ajusta o padding geral e a margem do container */
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    /* Reduz o tamanho das fontes para caber melhor na tela */
+    h1 {
+        font-size: 1.7em;
+    }
+
+    legend {
+        font-size: 1.05em;
+    }
+
+    #diagnostico-geral {
+        font-size: 1.2em;
+        padding: 12px;
+    }
+    
+    .pilar-resultado h3,
+    .beneficios-lista li,
+    button {
+        font-size: 1em;
+    }
+    
+    /* Reduz o padding dos fieldsets e do resultado */
+    fieldset {
+        padding: 15px;
+    }
+    
+    #diagnostico {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    /* Ajusta o modal para telas menores */
+    #modal-content p {
+        padding: 0 15px;
+        font-size: 1em;
+    }
+
+    #lead-form {
+        padding: 15px;
+    }
+
+    #modal-content h2 {
+        font-size: 1.3em;
+    }
 }
