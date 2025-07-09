@@ -59,7 +59,7 @@ function configurarDiagnostico(textos) {
 
     leadForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const urlDoScript = "https://script.google.com/macros/s/AKfycbyg17yd1ppXzv0-scE2Fo7McbpnUSzQlhq2kDs2luSLwb4M6-dGv-p2cqfPzRcBydei/exec";
+        const urlDoScript = "https://script.google.com/macros/s/AKfycbx7wuuZopusZF1gUteQWgH5Kn7MVnkYUtsmOLB47lfYTFzzO7tee08rHQYpnCGrVjcM/exec";
         const submitButton = e.target.querySelector('button[type="submit"]');
         const formData = new FormData(leadForm);
 
@@ -73,19 +73,19 @@ function configurarDiagnostico(textos) {
         const { resp1, resp2, resp3 } = respostasSalvas;
         diagnosticoAtual = textos.diagnosticos[resp1][resp2][resp3];
         
-        const statusDiagnostico = removerEmojis(diagnosticoAtual.geral).replace('Estrutura', '').trim();
-        const stringRespostas = `${resp1}${resp2}${resp3}`;
+            const statusDiagnostico = removerEmojis(diagnosticoAtual.geral).replace('Estrutura', '').trim();
+            const stringRespostas = `${resp1}${resp2}${resp3}`;
 
-        formData.append('diagnostico', statusDiagnostico);
-        formData.append('respostas', stringRespostas);
+            formData.append('diagnostico', statusDiagnostico);
+            formData.append('respostas', stringRespostas);
 
-        submitButton.disabled = true;
-        submitButton.textContent = "Salvando...";
+            submitButton.disabled = true;
+            submitButton.textContent = "Salvando...";
 
-        fetch(urlDoScript, {
-            method: 'POST',
-            body: formData,
-        })
+            fetch(urlDoScript, {
+                method: 'POST',
+                body: formData,
+            })
         .then(response => response.json())
         .then(data => {
             if (data.result === 'success') {
