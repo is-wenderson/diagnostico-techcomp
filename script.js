@@ -145,158 +145,161 @@ function configurarDiagnostico(textos) {
     });
 
 function gerarEBaixarPDF(diagnostico, recomendacaoHTML, leadData) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    const margin = 20;
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
 
-    if (headerBase64) {
-        const img = new Image();
-        img.src = headerBase64;
-        img.onload = () => {
-            const aspectRatio = img.height / img.width;
-            const imgWidth = pageWidth;
-            const imgHeight = imgWidth * aspectRatio;
-            doc.addImage(headerBase64, 'PNG', 0, 0, imgWidth, imgHeight);
-            const yStart = imgHeight + 10;
-            continuarGeracao(doc, yStart, pageWidth, pageHeight, margin, diagnostico, recomendacaoHTML, leadData);
+        const margin = 15;
+        const maxWidth = doc.internal.pageSize.getWidth() - margin * 2;
+        const lineHeight = 6;
+        let y = 55; // após header
+
+        const headerHeight = 40;
+        const logoUrl = "https://i.postimg.cc/vBwH7FMm/image-psd.png";
+
+        const addHeader = async () => {
+            return new Promise(resolve => {
+                const img = new Image();
+                img.onload = () => {
+                    const pageWidth = doc.internal.pageSize.getWidth();
+                    doc.setFillColor(49, 134, 149); // fallback cor do gradiente
+                    doc.rect(0, 0, pageWidth, headerHeight, 'F');
+                    doc.addImage(img, 'PNG', (pageWidth - 30) / 2, 5, 30, 30);
+                    resolve();
+                };
+                img.crossOrigin = "";
+                img.src = logoUrl;
+            });
         };
-    } else {
-        const yStart = margin;
-        continuarGeracao(doc, yStart, pageWidth, pageHeight, margin, diagnostico, recomendacaoHTML, leadData);
-    }
-}
 
-function continuarGeracao(doc, yStart, pageWidth, pageHeight, margin, diagnostico, recomendacaoHTML, leadData) {
-    let y = yStart;
-    const maxWidth = pageWidth - margin * 2;
-    const lineHeight = 6;
+        const addFooter = () => {
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const pageWidth = doc.internal.pageSize.getWidth();
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'italic');
+                doc.setTextColor(120);
+                doc.line(margin, pageHeight - 18, pageWidth - margin, pageHeight - 18);
+                doc.text("Relatório gerado pela Techcomp, uma empresa do Grupo Ecomp.", margin, pageHeight - 10);
+                doc.text(`Página ${i} de ${pageCount}`, pageWidth - margin, pageHeight - 10, { align: 'right' });
+            }
+        };
 
-    const statusGeralLimpo = removerEmojis(diagnostico.geral).trim();
-    const statusLower = statusGeralLimpo;
+        const checkPageBreak = (alturaNecessaria) => {
+            if (y + alturaNecessaria > doc.internal.pageSize.getHeight() - 25) {
+                doc.addPage();
+                y = margin + 10;
+            }
+        };
 
-    let bgColor = [230, 240, 255]; // padrão azul claro
-    let borderColor = [30, 58, 138]; // padrão azul escuro
-    let textColor = [30, 58, 138];
-
-    if (statusLower.includes("Estrutura Crítica")) {
-        bgColor = [254, 226, 226];      // vermelho claro
-        borderColor = [153, 27, 27];    // vermelho escuro
-        textColor = [153, 27, 27];
-    } else if (statusLower.includes("Estrutura Intermediária")) {
-        bgColor = [254, 249, 195];      // amarelo claro
-        borderColor = [146, 64, 14];    // amarelo escuro
-        textColor = [146, 64, 14];
-    } else if (statusLower.includes("Estrutura Saudável")) {
-        bgColor = [209, 250, 229];      // verde claro
-        borderColor = [6, 95, 70];      // verde escuro
-        textColor = [6, 95, 70];
-    }
-
-    const addFooter = () => {
-        doc.setFontSize(9);
-        doc.setFont('helvetica', 'italic');
-        doc.setTextColor(128);
-        doc.line(margin, pageHeight - 18, pageWidth - margin, pageHeight - 18);
-        doc.text("Relatório gerado pela Techcomp, uma empresa do Grupo Ecomp.", margin, pageHeight - 10);
-        doc.text(`Página 1 de 1`, pageWidth - margin, pageHeight - 10, { align: 'right' });
-    };
-
-    // Título principal
-    doc.setFontSize(20);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor("#1e3a8a");
-    doc.text("Diagnóstico de Infraestrutura de TI", pageWidth / 2, y, { align: 'center' });
-    y += 10;
-
-    // Empresa
-    doc.setFontSize(13);
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(60);
-    doc.text(`Relatório para: ${leadData.empresa}`, pageWidth / 2, y, { align: 'center' });
-    y += 15;
-
-    // Caixa de diagnóstico geral com cor dinâmica
-    doc.setFillColor(...bgColor);
-    doc.setDrawColor(...borderColor);
-    doc.roundedRect(margin, y, pageWidth - margin * 2, 12, 3, 3, 'FD');
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(...textColor);
-    doc.text(statusGeralLimpo, pageWidth / 2, y + 8, { align: 'center' });
-    y += 20;
-
-    const adicionarSecaoSimples = (titulo, texto) => {
-        const textoLimpo = removerEmojis(texto).trim();
-        const linhas = doc.splitTextToSize(textoLimpo, maxWidth);
-        doc.setFontSize(13);
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor("#1e3a8a");
-        doc.text(titulo, margin, y);
-        y += lineHeight * 1.5;
-
-        doc.setFontSize(11);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor("#333");
-        doc.text(linhas, margin, y);
-        y += (linhas.length * lineHeight) + lineHeight;
-    };
-
-    // PILARES
-    adicionarSecaoSimples("Pilar 1: Monitoramento de Equipamentos", diagnostico.pilar1);
-    adicionarSecaoSimples("Pilar 2: Conectividade / Internet", diagnostico.pilar2);
-    adicionarSecaoSimples("Pilar 3: Manutenção Preventiva", diagnostico.pilar3);
-
-    // RECOMENDAÇÃO FINAL
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = recomendacaoHTML;
-
-    tempDiv.childNodes.forEach(node => {
-        const textoOriginal = node.innerText;
-        if (!textoOriginal || textoOriginal.trim() === "" || node.tagName === 'A') return;
-        const textoLimpo = removerEmojis(textoOriginal).trim();
-        const linhas = doc.splitTextToSize(textoLimpo, maxWidth);
-
-        if (node.tagName === 'H3') {
+        const adicionarSecaoSimples = (titulo, texto) => {
+            const textoLimpo = removerEmojis(texto).trim();
+            const linhas = doc.splitTextToSize(textoLimpo, maxWidth);
+            checkPageBreak(10 + (linhas.length * lineHeight));
             doc.setFontSize(13);
             doc.setFont("helvetica", "bold");
             doc.setTextColor("#1e3a8a");
-            doc.text(linhas, margin, y);
-            y += (linhas.length * lineHeight) + (lineHeight / 2);
-        }
-
-        if (node.tagName === 'P') {
+            doc.text(titulo, margin, y);
+            y += lineHeight * 1.5;
             doc.setFontSize(11);
-            doc.setFont("helvetica", node.classList.contains('fechamento') ? "italic" : "normal");
+            doc.setFont("helvetica", "normal");
             doc.setTextColor("#333");
             doc.text(linhas, margin, y);
             y += (linhas.length * lineHeight) + lineHeight;
-        }
+        };
 
-        if (node.tagName === 'UL') {
-            y += lineHeight / 2;
-            Array.from(node.children).forEach(liNode => {
-                const textoDoItem = removerEmojis(liNode.innerText).trim();
-                if (!textoDoItem) return;
-                const linhas = doc.splitTextToSize(textoDoItem, maxWidth - 5);
-                doc.setFontSize(11);
-                doc.setFont("helvetica", "normal");
-                doc.setTextColor("#333");
-                doc.text("•", margin, y);
-                doc.text(linhas, margin + 5, y);
-                y += (linhas.length * lineHeight) + (lineHeight / 2);
+        const buildContent = () => {
+            // Título principal
+            doc.setFontSize(18);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor("#1e3a8a");
+            doc.text("Diagnóstico de Infraestrutura de TI", doc.internal.pageSize.getWidth() / 2, y, { align: 'center' });
+            y += 10;
+
+            // Empresa
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(80);
+            doc.text(`Relatório para: ${leadData.empresa}`, doc.internal.pageSize.getWidth() / 2, y, { align: 'center' });
+            y += 12;
+
+            // Status geral
+            const statusGeralLimpo = removerEmojis(diagnostico.geral).replace('Estrutura', '').trim();
+            doc.setFontSize(14);
+            if (diagnostico.geral.includes("Crítica")) doc.setTextColor(192, 0, 0);
+            else if (diagnostico.geral.includes("Intermediária")) doc.setTextColor(245, 128, 40);
+            else doc.setTextColor(34, 139, 34);
+            doc.text(statusGeralLimpo, doc.internal.pageSize.getWidth() / 2, y, { align: 'center' });
+            y += 10;
+
+            // Separador
+            doc.setDrawColor("#e2e8f0");
+            doc.line(margin, y, doc.internal.pageSize.getWidth() - margin, y);
+            y += 10;
+
+            // Pilares
+            adicionarSecaoSimples("Pilar 1: Monitoramento de Equipamentos", diagnostico.pilar1);
+            adicionarSecaoSimples("Pilar 2: Conectividade / Internet", diagnostico.pilar2);
+            adicionarSecaoSimples("Pilar 3: Manutenção Preventiva", diagnostico.pilar3);
+
+            // Recomendação final
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = recomendacaoHTML;
+            tempDiv.childNodes.forEach(node => {
+                const textoOriginal = node.innerText;
+                if (!textoOriginal || textoOriginal.trim() === "" || node.tagName === 'A') return;
+                const textoLimpo = removerEmojis(textoOriginal).trim();
+                const linhas = doc.splitTextToSize(textoLimpo, maxWidth);
+
+                if (node.tagName === 'H3') {
+                    checkPageBreak(10 + (linhas.length * lineHeight));
+                    doc.setFontSize(13);
+                    doc.setFont("helvetica", "bold");
+                    doc.setTextColor("#1e3a8a");
+                    doc.text(linhas, margin, y);
+                    y += (linhas.length * lineHeight) + 2;
+                }
+                if (node.tagName === 'P') {
+                    checkPageBreak(10 + (linhas.length * lineHeight));
+                    doc.setFontSize(11);
+                    doc.setFont("helvetica", node.classList.contains('fechamento') ? "italic" : "normal");
+                    doc.setTextColor("#333333");
+                    doc.text(linhas, margin, y);
+                    y += (linhas.length * lineHeight) + 2;
+                }
+                if (node.tagName === 'UL') {
+                    y += lineHeight / 2;
+                    Array.from(node.children).forEach(liNode => {
+                        const textoDoItem = removerEmojis(liNode.innerText).trim();
+                        if (!textoDoItem) return;
+                        const linhas = doc.splitTextToSize(textoDoItem, maxWidth - 5);
+                        checkPageBreak(5 + (linhas.length * lineHeight));
+                        doc.setFontSize(11);
+                        doc.setFont("helvetica", "normal");
+                        doc.setTextColor("#333333");
+                        doc.text("•", margin, y);
+                        doc.text(linhas, margin + 5, y);
+                        y += (linhas.length * lineHeight) + 2;
+                    });
+                    y += lineHeight;
+                }
             });
-            y += lineHeight;
-        }
-    });
+        };
 
-    addFooter();
-    const nomeArquivo = `Diagnostico_TI_${leadData.empresa.replace(/\s/g, '_')}.pdf`;
-    doc.save(nomeArquivo);
+        addHeader().then(() => {
+            buildContent();
+            addFooter();
+            const nomeArquivo = `Diagnostico_TI_${leadData.empresa.replace(/\s/g, '_')}.pdf`;
+            doc.save(nomeArquivo);
+        });
+
+    } catch (error) {
+        console.error("Erro ao gerar o PDF:", error);
+        alert("Desculpe, ocorreu um erro ao tentar gerar o PDF. Por favor, verifique o console de erros ou contate o suporte.");
+    }
 }
-
-
 
 
     function getClasseEstilo(textoGeral) {
