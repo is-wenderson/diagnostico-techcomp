@@ -76,7 +76,7 @@ function configurarDiagnostico(textos) {
             const statusDiagnostico = removerEmojis(diagnosticoAtual.geral).replace('Estrutura', '').trim();
             const stringRespostas = `${resp1}${resp2}${resp3}`;
 
-            formData.append('diagnostico', Status_Geral);
+            formData.append('status_geral', statusDiagnostico);
             formData.append('respostas', stringRespostas);
 
             submitButton.disabled = true;
